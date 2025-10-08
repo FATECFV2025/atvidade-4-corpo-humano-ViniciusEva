@@ -1,30 +1,31 @@
 package main.java;
-import java.util.Scanner;
-
 public class App {
-        //Comentário
+    public static void main(String[] args) {
 
-    public static void funcao_teste (){
-        //Biblioteca para entrada de dados
-        Scanner ler = new Scanner(System.in); 
+        // Criando uma instância da classe CorpoHumano
+        // Massa: 2 kg, Volume: 0.07 m³
+        CorpoHumano pessoa = new CorpoHumano(70.0, 0.07);
 
-        //variável local a
-        String v2;
-        int v1;
+        // Acessando as informações usando os métodos getters
+        System.out.println("--- Informações Iniciais ---");
+        System.out.println("Massa: " + pessoa.getMassa() + " kg");
+        System.out.println("Volume: " + pessoa.getVolume() + " m³");
+        System.out.println("Densidade: " + String.format("%.2f", pessoa.getDensidade()) + " kg/m³");
 
-        System.out.println("Comando de Saida de Dados");
-        
-        System.out.printf("Informe uma palavra: ");
-        v2 = ler.next();
+        // Modificando a massa e o volume usando os métodos setters
+        System.out.println("\n--- Alterando a Massa e o Volume ---");
+        pessoa.setMassa(75.0);
+        pessoa.setVolume(0.075);
 
-        System.out.printf("Informe um número: ");
-        v1 = ler.nextInt();
+        // Verificando as novas informações
+        System.out.println("Nova massa: " + pessoa.getMassa() + " kg");
+        System.out.println("Novo volume: " + pessoa.getVolume() + " m³");
+        System.out.println("Nova densidade: " + String.format("%.2f", pessoa.getDensidade()) + " kg/m³");
 
-        System.out.printf(v2+" "+v1);
+        // Tentando definir valores inválidos
+        System.out.println("\n--- Tentando inserir valores inválidos ---");
+        pessoa.setMassa(-10.0);
+        pessoa.setVolume(0.0);
     }
-    public static void main(String[] args) throws Exception {
-        funcao_teste();
 
-
-    }
 }
