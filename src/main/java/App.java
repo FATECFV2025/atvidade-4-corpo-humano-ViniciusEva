@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 // Implementar o atributo e os métodos de acesso para Altura
 
-public class Main {
+public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
