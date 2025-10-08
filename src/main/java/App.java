@@ -1,88 +1,55 @@
 package main.java;
 import java.util.Scanner;
 
-public class CorpoHumano {
+// Implementar o atributo e os métodos de acesso para Altura
 
-    // Atributos privados
-    private double massa; // em kg
-    private double volume; // em m³
-    private double densidade; // em kg/m³
-    private double altura; // em m
-    private double imc; // Índice de Massa Corporal
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-    // Construtor da classe
-    public CorpoHumano(double massa, double volume, double altura) {
-        setMassa(massa);
-        setVolume(volume);
-        setAltura(altura);
-    }
+        // === CRIAÇÃO DO OBJETO CORPO HUMANO ===
+        System.out.println("=== CRIAÇÃO DO OBJETO CORPO HUMANO ===");
+        System.out.print("Digite a massa inicial (kg): ");
+        double massaInicial = scanner.nextDouble();
 
-    // Método privado para calcular a densidade
-    private void calcularDensidade() {
-        if (this.volume > 0) {
-            this.densidade = this.massa / this.volume;
-        } else {
-            this.densidade = 0;
-        }
-    }
+        System.out.print("Digite o volume inicial (m³): ");
+        double volumeInicial = scanner.nextDouble();
 
-    // Novo método privado para calcular o IMC
-    private void calcularIMC() {
-        if (this.altura > 0) {
-            this.imc = this.massa / (this.altura * this.altura);
-        } else {
-            this.imc = 0;
-        }
-    }
+        // OBS: A densidade é calculada, não digitada. A saída esperada está incorreta neste ponto.
+        // O código abaixo pede a densidade, mas ignora o valor, pois ele é calculado pela classe.
+        // Mantive a estrutura para corresponder à sua entrada esperada.
+        System.out.print("Digite a densidade inicial (kg/m³): ");
+        double densidadeDigitada = scanner.nextDouble(); // Valor ignorado
+        System.out.print("Digite a altura inicial (m): ");
+        double alturaInicial = scanner.nextDouble();
 
-    // --- Métodos Getters (para acesso público) ---
-    public double getMassa() {
-        return this.massa;
-    }
+        CorpoHumano pessoa = new CorpoHumano(massaInicial, volumeInicial, alturaInicial);
 
-    public double getVolume() {
-        return this.volume;
-    }
+        // === VALORES INICIAIS ===
+        System.out.println("=== VALORES INICIAIS ===");
+        System.out.println("Massa: " + pessoa.getMassa() + " kg");
+        System.out.println("Volume: " + pessoa.getVolume() + " m³");
+        System.out.println("Densidade: " + pessoa.getDensidade() + " kg/m³");
+        System.out.println("Altura: " + pessoa.getAltura() + " m");
+        System.out.println("IMC: " + pessoa.getImc());
 
-    public double getDensidade() {
-        return this.densidade;
-    }
+        // --- ALTERANDO VALORES ---
+        System.out.print("Digite uma nova massa (kg): ");
+        double novaMassa = scanner.nextDouble();
+        pessoa.setMassa(novaMassa);
 
-    public double getAltura() {
-        return this.altura;
-    }
+        System.out.print("Digite uma nova altura (m): ");
+        double novaAltura = scanner.nextDouble();
+        pessoa.setAltura(novaAltura);
 
-    public double getImc() {
-        return this.imc;
-    }
+        // --- EXIBINDO NOVOS VALORES ---
+        System.out.println("Novos valores:");
+        System.out.println("Massa: " + pessoa.getMassa() + " kg");
+        System.out.println("Altura: " + pessoa.getAltura() + " m");
+        System.out.println("Novo IMC: " + pessoa.getImc());
 
-    // --- Métodos Setters (para modificação pública com validação) ---
-    public void setMassa(double massa) {
-        if (massa >= 0) {
-            this.massa = massa;
-            calcularDensidade();
-            calcularIMC(); // Recalcula o IMC
-        } else {
-            System.out.println("Erro: A massa não pode ser negativa.");
-        }
-    }
-
-    public void setVolume(double volume) {
-        if (volume > 0) {
-            this.volume = volume;
-            calcularDensidade();
-        } else {
-            System.out.println("Erro: O volume deve ser maior que zero.");
-        }
-    }
-
-    public void setAltura(double altura) {
-        if (altura > 0) {
-            this.altura = altura;
-            calcularIMC(); // Recalcula o IMC
-        } else {
-            System.out.println("Erro: A altura deve ser maior que zero.");
-        }
+        scanner.close();
     }
 
 }
+
