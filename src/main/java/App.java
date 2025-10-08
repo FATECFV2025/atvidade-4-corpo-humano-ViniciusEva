@@ -1,31 +1,88 @@
 package main.java;
-public class App {
-    public static void main(String[] args) {
+import java.util.Scanner;
 
-        // Criando uma instância da classe CorpoHumano
-        // Massa: 2 kg, Volume: 0.07 m³
-        CorpoHumano pessoa = new CorpoHumano(70.0, 0.07);
+public class CorpoHumano {
 
-        // Acessando as informações usando os métodos getters
-        System.out.println("--- Informações Iniciais ---");
-        System.out.println("Massa: " + pessoa.getMassa() + " kg");
-        System.out.println("Volume: " + pessoa.getVolume() + " m³");
-        System.out.println("Densidade: " + String.format("%.2f", pessoa.getDensidade()) + " kg/m³");
+    // Atributos privados
+    private double massa; // em kg
+    private double volume; // em m³
+    private double densidade; // em kg/m³
+    private double altura; // em m
+    private double imc; // Índice de Massa Corporal
 
-        // Modificando a massa e o volume usando os métodos setters
-        System.out.println("\n--- Alterando a Massa e o Volume ---");
-        pessoa.setMassa(75.0);
-        pessoa.setVolume(0.075);
+    // Construtor da classe
+    public CorpoHumano(double massa, double volume, double altura) {
+        setMassa(massa);
+        setVolume(volume);
+        setAltura(altura);
+    }
 
-        // Verificando as novas informações
-        System.out.println("Nova massa: " + pessoa.getMassa() + " kg");
-        System.out.println("Novo volume: " + pessoa.getVolume() + " m³");
-        System.out.println("Nova densidade: " + String.format("%.2f", pessoa.getDensidade()) + " kg/m³");
+    // Método privado para calcular a densidade
+    private void calcularDensidade() {
+        if (this.volume > 0) {
+            this.densidade = this.massa / this.volume;
+        } else {
+            this.densidade = 0;
+        }
+    }
 
-        // Tentando definir valores inválidos
-        System.out.println("\n--- Tentando inserir valores inválidos ---");
-        pessoa.setMassa(-10.0);
-        pessoa.setVolume(0.0);
+    // Novo método privado para calcular o IMC
+    private void calcularIMC() {
+        if (this.altura > 0) {
+            this.imc = this.massa / (this.altura * this.altura);
+        } else {
+            this.imc = 0;
+        }
+    }
+
+    // --- Métodos Getters (para acesso público) ---
+    public double getMassa() {
+        return this.massa;
+    }
+
+    public double getVolume() {
+        return this.volume;
+    }
+
+    public double getDensidade() {
+        return this.densidade;
+    }
+
+    public double getAltura() {
+        return this.altura;
+    }
+
+    public double getImc() {
+        return this.imc;
+    }
+
+    // --- Métodos Setters (para modificação pública com validação) ---
+    public void setMassa(double massa) {
+        if (massa >= 0) {
+            this.massa = massa;
+            calcularDensidade();
+            calcularIMC(); // Recalcula o IMC
+        } else {
+            System.out.println("Erro: A massa não pode ser negativa.");
+        }
+    }
+
+    public void setVolume(double volume) {
+        if (volume > 0) {
+            this.volume = volume;
+            calcularDensidade();
+        } else {
+            System.out.println("Erro: O volume deve ser maior que zero.");
+        }
+    }
+
+    public void setAltura(double altura) {
+        if (altura > 0) {
+            this.altura = altura;
+            calcularIMC(); // Recalcula o IMC
+        } else {
+            System.out.println("Erro: A altura deve ser maior que zero.");
+        }
     }
 
 }
